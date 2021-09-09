@@ -3,4 +3,4 @@
 
 //write function prototype here
 
-int multiply_numbers(int num, int num2);
+int multiply_numbers(int num2);
