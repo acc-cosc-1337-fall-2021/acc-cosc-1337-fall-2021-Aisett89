@@ -7,6 +7,8 @@
 /*
 RESULT:
 
+
+
 1
 2
 3
@@ -15,3 +17,13 @@ RESULT:
 
 */
 
+void display_text(std::string str)
+{
+    std::cout<<str<<'\n';
+    for(auto& ch: str)
+    {
+        std::cout<<ch<<"\n";
+        ch = 'z';
+    }
+    std::cout<<str<<"\n";
+}

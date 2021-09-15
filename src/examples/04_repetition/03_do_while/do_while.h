@@ -1,6 +1,10 @@
-//Write void function protype named prompt_user with no parameters
+void receivables();
+void payables();
+void payroll();
 
 
+//Write code for void function prompt_user to loop until
+//user opts not to continue.  
 
-//Write void function protype named run_menu with no parameters
-
+void prompt_user();
+void display_menu();
