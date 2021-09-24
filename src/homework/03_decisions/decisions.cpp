@@ -5,7 +5,6 @@
 
 
 //Write code for function(s) code here
-
 char letter_a = 'A';
 char letter_b = 'B';
 char letter_c = 'C';
