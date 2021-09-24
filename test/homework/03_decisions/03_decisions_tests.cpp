@@ -20,3 +20,4 @@ TEST_CASE("Grading Verification for switch", "switch vs letter") {
 	REQUIRE(get_letter_grade_using_switch(65) == "D");
 	REQUIRE(get_letter_grade_using_switch(50) == "F");
 }
+
