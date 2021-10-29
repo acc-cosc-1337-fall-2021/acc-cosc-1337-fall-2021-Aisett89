@@ -1,7 +1,8 @@
 #include "bank_account.h"
+#include "atm.h"
 using std::cout;
 using std::cin;
-
+using std::string;
 
 int main()
 {
@@ -9,6 +10,9 @@ int main()
 	// sending a different number each time, so that it makes a new number each time the program runs. 
 	Account account;// first object
 	Account account2(500); 
+	ATM atm;
+	int amount;
+	int choice = 0;
 	
 	
 	cout<<account.get_balance()<<"\n"; // second object
@@ -24,6 +28,33 @@ int main()
 
 	Account account3 = get_account(); // 4th object
 	// cout<<account3.get_balance()<<"\n";
+
+	cout<<"Welcome to the ATM.";
+	cout<<"\nType 1 for deposit.\nType 2 for withdraw.\nType 3 to see balance.\n";
+	cout<<"Type 4 to exit.";
+	cout<<"Type your answer here. ";
+	cin>>choice;
+
+	switch(choice)
+	{
+		case 1:
+			cout<<"How much do you want to deposit? ";
+			cin>>amount;
+			atm.deposit(amount);
+			 break;
+		case 2:	
+			cout<<"How much do you want to withdraw? ";
+			cin>>amount;
+			atm.withdraw(amount);
+			break;
+		case 3:
+			cout<<"Your account balance is: ";
+			atm.display_balance();
+		case 4:
+			break;
+	default:
+		cout<<"Something went wrong. ";
+	};
 
 	return 0;
 }
