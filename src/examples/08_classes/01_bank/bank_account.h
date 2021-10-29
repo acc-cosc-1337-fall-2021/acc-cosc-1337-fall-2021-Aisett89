@@ -5,6 +5,10 @@
 
 void deposit(int amount);
 
+#ifndef ACCOUNT_H
+#define ACCOUNT_H
+
+
 class Account 
 {
 public: 
@@ -18,7 +22,6 @@ public:
         // If you know you're just returning a value, make it const. 
         // otherwise, make it regular function.
 
-
     void deposit(int amount);
 
     void withdraw(int amount);
@@ -27,6 +30,8 @@ private:
     int balance{0}; // initialize to zero
     void get_begin_balance();
 };
+
+#endif ACCOUNT_H
 
 void display_account(Account account);
 Account get_account();
