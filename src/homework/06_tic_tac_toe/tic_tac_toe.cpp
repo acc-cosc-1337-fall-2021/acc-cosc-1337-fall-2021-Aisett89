@@ -13,7 +13,13 @@ void TicTacToe::start_game(string first_player)
 }
 
 void TicTacToe::clear_board()
+<<<<<<< HEAD
     { pegs[0,8] = " "; }
+=======
+{
+    pegs[0,8] = " ";
+}
+>>>>>>> 9b3604e1085377570d4ff6d1d4875f4daaacac64
 
 void TicTacToe::display_board() const
 {
@@ -25,12 +31,21 @@ void TicTacToe::display_board() const
 void TicTacToe::mark_board(int position)
 {
     if (player == "X" || player == "x")
+<<<<<<< HEAD
     { 
         cout<<"\nPlayer 'X's Turn \n"; 
     }
     else
     {
         player = "O"; 
+=======
+    {
+        cout<<"\nPlayer 'X's Turn \n";
+    }
+    else
+    {
+        player == "O";
+>>>>>>> 9b3604e1085377570d4ff6d1d4875f4daaacac64
         cout<<"\nPlayer 'O's Turn \n";
     }
 
@@ -48,9 +63,15 @@ string TicTacToe::get_player() const
 void TicTacToe::set_next_player()
 {
     if ( get_player() == "X")
+<<<<<<< HEAD
         { player = "O"; }
     else
         { player = "X"; }
+=======
+         player = "O";
+    else
+        player = "X";
+>>>>>>> 9b3604e1085377570d4ff6d1d4875f4daaacac64
 }
 
 bool TicTacToe::check_board_full() 
@@ -58,7 +79,13 @@ bool TicTacToe::check_board_full()
     for( auto peg : pegs ) 
     { 
         if (peg == " ") 
+<<<<<<< HEAD
         { return false; } 
+=======
+        { 
+            return false; 
+        } 
+>>>>>>> 9b3604e1085377570d4ff6d1d4875f4daaacac64
     } 
     return true; // nice
 }
@@ -67,6 +94,7 @@ bool TicTacToe::game_over()
 {
     bool game_condition;
     game_condition = check_board_full();
+<<<<<<< HEAD
 
     if ( check_column_win() == true || check_row_win() == true ||  check_diagonal_win() == true )
     {
@@ -136,3 +164,7 @@ void TicTacToe::set_winner()
     else 
         { winner = "X"; }
 }
+=======
+    return game_condition;
+}
+>>>>>>> 9b3604e1085377570d4ff6d1d4875f4daaacac64
