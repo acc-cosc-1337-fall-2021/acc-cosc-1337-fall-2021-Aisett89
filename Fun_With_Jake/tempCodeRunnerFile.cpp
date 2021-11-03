@@ -1,0 +1,1 @@
+ std::cout<<ptr_num<<"\n";
