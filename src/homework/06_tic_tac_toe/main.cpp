@@ -1,48 +1,76 @@
 // MAIN
+#include "tic_tac_toe_manager.h"
 #include "tic_tac_toe.h"
-#include<iostream>
-using std::cout; 
-using std::cin; 
-using std::string; 
+#include <utility>      
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <fstream>
 using std::vector;
+using std::pair;
+using std::string;
+using std::make_pair;
+using std::string;
+using std::cout;
+using std::cin;
+using std::endl;
+using std::ostream;
+using std::istream;
 
 int main() 
 {
 	string first_player;
-	int position;
 	int choice;
+	int t;
+	int o;
+	int x;
 
 	TicTacToe TTT;
+	TicTacToeManager TTTM;
 	cout<<"\nHello! Welcome to Tic-Tac-Toe!\n";
 	cout<<"\nWould you like to play a game?\n";
 	cout<<"Type 1 to play or 2 to quit: ";
 	cin>>choice;
-
-	while (choice == 1)
+	
+	while ( choice == 1 )
 	{
 		cout<<"\nFirst player, type 'X' or 'O' to choose which you will play as: ";
 		cin>>first_player;
-
+		TTT.player_validation(first_player);
+	// PLAY GAME //
 		TTT.start_game(first_player); // drops first_player into start_game()
-		TTT.display_board(); // shows initial board <-- should be clear.
-		do{
-			
-			cout<<"Specify which space you would like to play by type a number (1-9): ";
-			cin>>position;
-			TTT.mark_board(position); // <-- marks X or O depending on player.
+		// OVERLOADING //
+		while ( TTT.game_over() != true )
+		{
+			cin >> TTT; // pass game instance to be ran. 
+			cout << TTT; // output game results
+		} 
+	// END GAME FUNCTIONALITY //
+		// Save game
+		TTTM.save_game(TTT);
+		TTTM.get_winner_total( x,  o,  t);
 
-			TTT.display_board(); // <-- shows updated board.
-			TTT.game_over(); // asks to play again.
-
-		} while ( TTT.game_over() != true );
-
+		cout<< "Testing function... " <<endl;
+		TTTM.testing_function(x,  o,  t);
+		
+		// reset player
+		string first_player = ""; // canceling out the original player choice. 
+		
+		//reestablish choice
 		cout<<"Great game! Would you like to play again?\n";
 		cout<<"Type '1' to play again or Type '2' to quit: ";
-		cin>>choice;
+		cin>>choice;		
 	}
-	if ( choice == 2 )
-	{
-		cout<<"Thanks for playing!\n";
-	}
+	// QUIT GAME
+		if ( choice == 2 )
+		{
+			cout << TTTM << endl;
+			cout<<"x wins: "<< x << endl;
+			cout<<"o wins: "<< o << endl;
+			cout<<"t wins: "<< t << endl;
+			cout<<"\nThanks for playing!" << endl;
+		}
+		
+
 	return 0;
 }

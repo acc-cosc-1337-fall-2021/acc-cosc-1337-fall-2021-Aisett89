@@ -1,0 +1,60 @@
+1) Open your acc-cosc-1337-fall-2020-username project.
+      Go to team explorer, select synchronization and select the pull option.
+
+2) Add the following changes to the TicTacToe class.
+     Overload the istream operator >> (cin) 
+             a) From main.cpp, move the code that capture position including the  the cout<<"Enter position" code
+             b) After capturing position call the mark_board function
+     Overload the ostream operator << (cout)  this code will replace display_board function
+            a) In overloaded operator function output the board
+            b) remove the display_board function from your code including from header.
+3) Implement the Code for the TicTacToManager class (see table above). tic_tac_toe_manger.h and .cpp
+4) In main.cpp remove code that captures keyboard data and replace with the overloaded cin operator in TicTacToe.
+     Also use overloaded ostream(cout) operators in TicTacToe to output to screen.
+5.   Use TicTacToeManager to track game history:
+      a) In main.cpp create an instance of TicTacToManager, after each complete game add the TicTacToe game instance to the 
+          TicTacToeManager.
+      b)  Display the running scores to the user: Example X wins 1, O wins 2, Ties 1
+      c) After the user opts out of playing, before the return statement display all the games played.
+          Use TicTacToeManager overloaded ostream.
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- TicTacToeManager class-Add Header Guards -
+// PUBLIC //
+* void save_game(TicTacToe b) 
+    >> add the TicTacToe to games vector with push_back, call update winner count    pass the winner from TicTacToe to update x, o, or tie totals.
+
+* ostream& operator<<(std::ostream & out, const TicTacToeManager & manager)
+    >> Overload <<-Loop through vector of TicTacToe and call the TicTacToe cout overload.
+
+* void get_winner_total(int& o, int& w, int&t)
+    >> Use references to get the winners  
+
+// PRIVATE //
+* vector of TicTacToe
+     >> Create a vector of TicTacToe named games
+
+* int x_win
+    >> initialize to 0     
+* * int o_win
+    >> initialize to 0 
+* int ties
+    >> initialize to 0 
+
+* void update_winner_count(string winner)
+    >> if winner X increment x_win, if winner O increment o_win, and else increment ties 
+
+// TEST CASES //
+* Update Test Cases
+    >> For any test case test get winner class function, add new assertion REQUIRES to validate that X or O winner
+
+* Test TicTacToe manager get winner total function
+ - simulate playing 3 or more games with X, O, and C as winners
+ - verify that that x_win, o_win, and ties tally correctly
+    >> Play at least 3 games 
+    >> Add the games to the TicTacToeManager class
+    >> test get winner total for correct tally 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
