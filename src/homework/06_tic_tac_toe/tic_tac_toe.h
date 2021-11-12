@@ -2,13 +2,28 @@
 #include <vector>
 #include <string>
 
+
 // what do these do? <-- I understand that they block off the code to protect them, but how/why?
 #ifndef TTT_H 
 #define TTT_H 
 
 class TicTacToe 
 {
+    private:
+        std::string player;
+        std::string winner;
+        int placeholder;
+        bool check_board_full();
+        void set_winner();
+        void clear_board();
+        void set_next_player();  
+    protected:
+        virtual bool check_column_win();
+        virtual bool check_row_win();
+        virtual bool check_diagonal_win();
+        std::vector<std::string> pegs;
     public:
+        int size;
         std::string get_player() const; 
         std::string get_winner() const{ return winner; };
         // user_input <-- "call mark_board"
@@ -20,17 +35,8 @@ class TicTacToe
         void mark_board(int position);
         void display_board() const;
         std::string player_validation( std::string &prompt );
-    private:
-        std::string player;
-        std::vector<std::string> pegs = std::vector<std::string>(9," ");
-        std::string winner;
-        bool check_board_full();
-        bool check_column_win();
-        bool check_row_win();
-        bool check_diagonal_win();
-        void set_winner();
-        void clear_board();
-        void set_next_player();   
+        TicTacToe(){}; // default 
+        TicTacToe(int size) : pegs(size*size, " "){}; // this is what we're calling from 3/4 .h
 };
 
 

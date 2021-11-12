@@ -2,6 +2,7 @@
 #include "tic_tac_toe.h"
 #include <utility>      
 #include <string>
+#include "math.h"
 #include <vector>
 #include <algorithm>
 #include <fstream>
@@ -15,6 +16,7 @@ using std::cin;
 using std::endl;
 using std::ostream;
 using std::istream;
+
 
 void TicTacToe::start_game(string first_player)
 {
@@ -34,11 +36,22 @@ istream& operator>>(istream& input, TicTacToe & ttt) // cin , ttt_object
     ttt.mark_board(position); // <-- marks X or O depending on player.
     return input;
 }
+
 ostream& operator<<(ostream& output /*this is "cout" now */, const TicTacToe &TTT ) // displaying board. 
-{   
+{
+    if ( TTT.pegs.size() > 9)   
+    {
+    output<<TTT.pegs[0]<<" | "<<TTT.pegs[1]<<" | "<<TTT.pegs[2]<< TTT.pegs[3]<<"\n";
+    output<<TTT.pegs[4]<<" | "<<TTT.pegs[5]<<" | "<<TTT.pegs[6]<< TTT.pegs[7]<<"\n";
+    output<<TTT.pegs[8]<<" | "<<TTT.pegs[9]<<" | "<<TTT.pegs[10]<< TTT.pegs[11]<<"\n";
+    output<<TTT.pegs[12]<<" | "<<TTT.pegs[13]<<" | "<<TTT.pegs[14]<< TTT.pegs[15]<<"\n";
+    }
+    else if ( TTT.pegs.size() < 10 ) 
+    {
     output<<TTT.pegs[0]<<" | "<<TTT.pegs[1]<<" | "<<TTT.pegs[2]<<"\n";
     output<<TTT.pegs[3]<<" | "<<TTT.pegs[4]<<" | "<<TTT.pegs[5]<<"\n";
     output<<TTT.pegs[6]<<" | "<<TTT.pegs[7]<<" | "<<TTT.pegs[8]<<"\n";
+    }
     return output;
 }
 // void TicTacToe::display_board() const
@@ -108,53 +121,22 @@ bool TicTacToe::game_over()
     }
     return game_condition;
 }
+// ---
 bool TicTacToe::check_column_win()
 {
-    if (pegs[0] == "X" && pegs[3] == "X" && pegs[6] == "X")
-        { return true; }
-    else if (pegs[1] == "X" && pegs[4] == "X" && pegs[7] == "X")
-        { return true; }
-    else if (pegs[2] == "X" && pegs[5] == "X" && pegs[8] == "X")
-        { return true; }
-    if (pegs[0] == "O" && pegs[3] == "O" && pegs[6] == "O")
-        { return true; }
-    else if (pegs[1] == "O" && pegs[4] == "O" && pegs[7] == "O")
-        { return true; }
-    else if (pegs[2] == "O" && pegs[5] == "O" && pegs[8] == "O")
-        { return true; }
-    else
-        { return false; }
+    { return false; }
 }
+
 bool TicTacToe::check_row_win()
 {
-    if (pegs[0] == "X" && pegs[1] == "X" && pegs[2] == "X")
-        { return true; }
-    else if (pegs[3] == "X" && pegs[4] == "X" && pegs[5] == "X")
-        { return true; }
-    else if (pegs[6] == "X" && pegs[7] == "X" && pegs[8] == "X")
-        { return true; }
-    if (pegs[0] == "O" && pegs[1] == "O" && pegs[2] == "O")
-        { return true; }
-    else if (pegs[3] == "O" && pegs[4] == "O" && pegs[5] == "O")
-        { return true; }
-    else if (pegs[6] == "O" && pegs[7] == "O" && pegs[8] == "O")
-     { return true; }
-    else 
-        { return false; }
+    { return false; }
 }
+
 bool TicTacToe::check_diagonal_win()
 {
-    if (pegs[0] == "X" && pegs[4] == "X" && pegs[8] == "X")
-        { return true;}
-    else if (pegs[2] == "X" && pegs[4] == "X" && pegs[6] == "X")
-        { return true; }
-    else if (pegs[0] == "O" && pegs[4] == "O" && pegs[8] == "O")
-        { return true; }
-    else if (pegs[2] == "O" && pegs[4] == "O" && pegs[6] == "O")
-        { return true; }
-    else 
-        { return false; }
+    { return false; }
 }
+// ---
 void TicTacToe::set_winner()
 {
     if (player == "X")
@@ -162,16 +144,3 @@ void TicTacToe::set_winner()
     else if (player == "O")
         { winner = "X"; }
 }
-// string TicTacToe::player_validation(string &prompt)
-// {
-
-//     while(prompt != "X" && prompt != "O")
-//     {
-//         cout<<"\nDon't forget to use uppercase X or O.\n";
-//         std::cin.clear();
-//         std::cin.ignore(10000, '\n');
-//         cout<<"Please select X or O: ";
-//         cin>>prompt;
-//     }
-//     return prompt;
-// }

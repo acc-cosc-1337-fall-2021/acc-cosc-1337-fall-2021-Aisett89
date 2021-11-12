@@ -1,6 +1,8 @@
 // MAIN
 #include "tic_tac_toe_manager.h"
 #include "tic_tac_toe.h"
+#include "tic_tac_toe3.h"
+#include "tic_tac_toe4.h"
 #include <utility>      
 #include <string>
 #include <vector>
@@ -16,19 +18,38 @@ using std::cin;
 using std::endl;
 using std::ostream;
 using std::istream;
+using std::make_unique;
+using std::unique_ptr;
+
+
 
 int main() 
 {
 	string first_player;
+	int play_style;
 	int choice;
 	int t;
 	int o;
 	int x;
 
-	TicTacToe TTT;
+	uniq_ptr<TicTacToe>TTT; 
 	TicTacToeManager TTTM;
+
+    //  TicTacToe(int size) : pegs(size*size, " "){};
+
 	cout<<"\nHello! Welcome to Tic-Tac-Toe!\n";
 	cout<<"\nWould you like to play a game?\n";
+	cout<<"\nType 3 for TicTacToe"<<endl;
+	cout<<"\nType 4 for ConnectFour"<<endl;
+	cin>>play_style;
+	if ( play_style == 3 )
+		{
+			TTT = make_unique<TicTacToe3>(); // calling games. 
+		}
+	else if ( play_style == 4 )
+		{
+			TTT = make_unique<TicTacToe4>(); //calling games. 
+		}
 	cout<<"Type 1 to play or 2 to quit: ";
 	cin>>choice;
 	
@@ -36,22 +57,24 @@ int main()
 	{
 		cout<<"\nFirst player, type 'X' or 'O' to choose which you will play as: ";
 		cin>>first_player;
-		TTT.player_validation(first_player);
+		TTT->player_validation(first_player); // same as dot, but the relationship is different
+		// . is working with original variable.
+		// -> is working with copy. 
 	// PLAY GAME //
-		TTT.start_game(first_player); // drops first_player into start_game()
-		// OVERLOADING //
-		while ( TTT.game_over() != true )
+		TTT->start_game(first_player); // drops first_player into start_game()
+	// OVERLOADING //
+		while ( TTT->game_over() != true )
 		{
 			cin >> TTT; // pass game instance to be ran. 
 			cout << TTT; // output game results
 		} 
 	// END GAME FUNCTIONALITY //
 		// Save game
-		TTTM.save_game(TTT);
-		TTTM.get_winner_total( x,  o,  t);
+		TTTM->save_game(TTT);
+		TTTM->get_winner_total( x,  o,  t);
 
 		cout<< "Testing function... " <<endl;
-		TTTM.testing_function(x,  o,  t);
+		TTTM->testing_function(x,  o,  t);
 		
 		// reset player
 		string first_player = ""; // canceling out the original player choice. 

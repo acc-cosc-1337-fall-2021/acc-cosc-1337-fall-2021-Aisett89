@@ -1,37 +1,42 @@
 #include "tic_tac_toe_manager.h"
-#include <utility>      
+#include <utility>
+#include<memory>      
 #include <string>
 #include <vector>
 #include <algorithm>
 #include <fstream>
+#include <utility>
 using std::make_pair;
-using std::string;
-using std::cout;
-using std::cin;
-using std::endl;
-using std::vector;
 using std::pair;
+using std::endl;
+using std::unique_ptr;
+using std::vector;
+using std::string;
 using std::string;
 using std::ostream;
 using std::istream;
+using std::cout;
+using std::cin;
 
-void TicTacToeManager::save_game( TicTacToe &ttt ) 
+void TicTacToeManager::save_game( unique_ptr<TicTacToe> &Tic_Tac )
 {
-    games.push_back( ttt ); // add game to games list
-    update_winner_count( ttt.get_winner() ); // updating tally winner totals. 
+    update_winner_count( Tic_Tac->get_winner() ); // Tic_Tac is ttt as variable being passed to get winner
+    games.push_back( move(Tic_Tac) ); // Taking Tic_tac game and adding it to games vector
 }
+
 void TicTacToeManager::get_winner_total(int& x, int& o, int& t) // I think this is all I have to do...?
 {
     x = x_wins;
     o = o_wins;
     t = ties;
 }
+
 ostream& operator<<( ostream & output, const TicTacToeManager &TTTM )
 {
-    for ( auto game : TTTM.games ) // for each game in games, do something with one game. 
-    {
-        output << game << endl;    
-    }
+    for ( const auto /*pointer to *game */&game : TTTM.games ) // for each game in games, do something with one game. 
+    { // passing by memory location to be able to modify values in the location? <-- saves compilation?? As about this. 
+        output << *game << endl;    // display one-by-one, each game that was played. 
+    }            // ^-- dereferencing for value (not the memory location.)
     return output;
 }
 
