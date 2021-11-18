@@ -8,5 +8,5 @@ TEST_CASE("Verify Test Configuration", "verification") {
 TEST_CASE("Test account get balance")
 {
 	Account account;
-		REQUIRE(account.getbalance(0) == 0);
+		REQUIRE(account.get_balance(0) == 0);
 }

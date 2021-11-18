@@ -17,9 +17,5 @@ class TicTacToe3 : public TicTacToe
         TicTacToe3(): TicTacToe(3){} // creates constructor: ttt3, hooks parent with value 3
         // when you create ttt3, it says "the value is 'this.'"
 };
-// friend ostream &operator<<( ostream &output, const TicTacToe &ttt) {
-// output << ttt.pegs;
-// return output;
-// }
 
 #endif

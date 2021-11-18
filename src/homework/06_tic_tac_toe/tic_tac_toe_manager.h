@@ -28,4 +28,12 @@ class TicTacToeManager
     } 
 };
 
+// 2. Change save_game TicTacToe parameter to a unique_ptr of TicTacToe reference.
+// 	a.  In save_game make sure update_winner_count is the first statement (Use -> instead of .  
+//       	for get_winner).
+// 	b.  In save_game change games.push_back, add the move statement to game variable.
+
+void some_function();
+
+
 #endif

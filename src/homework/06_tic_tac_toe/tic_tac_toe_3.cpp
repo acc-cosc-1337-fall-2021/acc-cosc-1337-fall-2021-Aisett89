@@ -1,6 +1,9 @@
 #include "tic_tac_toe_3.h"
 
 
+// 4. From TicTacToe copy the code from  functions check_column_win, check_row_win, and 
+//     check_diagonal_win to the functions in TicTacToe3.
+
 bool TicTacToe3::check_column_win()
 { 
     if (pegs[0] == "X" && pegs[3] == "X" && pegs[6] == "X")

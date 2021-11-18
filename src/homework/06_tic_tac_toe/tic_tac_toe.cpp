@@ -17,6 +17,11 @@ using std::endl;
 using std::ostream;
 using std::istream;
 
+// 2. Make class variable pegs a protected variable, and change it to std::vector<std::string> pegs;
+// 3) Make functions check_column_win, check_row_win, and check_diagonal_win protected virtual functions.
+// 4. Modify the overloaded stream functions to work with TicTacToe 3 or 4
+
+
 
 void TicTacToe::start_game(string first_player)
 {
@@ -48,9 +53,10 @@ ostream& operator<<(ostream& output /*this is "cout" now */, const TicTacToe &TT
     }
     else if ( TTT.pegs.size() < 10 ) 
     {
-    output<<TTT.pegs[0]<<" | "<<TTT.pegs[1]<<" | "<<TTT.pegs[2]<<"\n";
-    output<<TTT.pegs[3]<<" | "<<TTT.pegs[4]<<" | "<<TTT.pegs[5]<<"\n";
-    output<<TTT.pegs[6]<<" | "<<TTT.pegs[7]<<" | "<<TTT.pegs[8]<<"\n";
+    output<<TTT.pegs[0]<<" | "<<TTT.pegs[1]<<" | "<<TTT.pegs[2]<< TTT.pegs[3]<<"\n";
+    output<<TTT.pegs[4]<<" | "<<TTT.pegs[5]<<" | "<<TTT.pegs[6]<<TTT.pegs[7]<<"\n";
+    output<<TTT.pegs[8]<<" | "<<TTT.pegs[9]<<" | "<<TTT.pegs[10]<<TTT.pegs[11]<<"\n";
+    output<<TTT.pegs[12]<<" | "<<TTT.pegs[13]<<" | "<<TTT.pegs[14]<<TTT.pegs[15]<<"\n";
     }
     return output;
 }
@@ -108,7 +114,7 @@ bool TicTacToe::game_over()
     check_diagonal_win() == true )
     {
         set_winner(); 
-        cout<<"\nCongrats, "<<winner<<"! You won!\n";
+        cout<< "\nCongrats, " << winner << "! You won!\n";
         game_condition = true;
     
     }

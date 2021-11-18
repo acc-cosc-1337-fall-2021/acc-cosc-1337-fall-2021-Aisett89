@@ -22,7 +22,7 @@ void TicTacToeManager::save_game( unique_ptr<TicTacToe> &Tic_Tac )
 {
     update_winner_count( Tic_Tac->get_winner() ); // Tic_Tac is ttt as variable being passed to get winner
     games.push_back( move(Tic_Tac) ); // Taking Tic_tac game and adding it to games vector
-}
+}       
 
 void TicTacToeManager::get_winner_total(int& x, int& o, int& t) // I think this is all I have to do...?
 {

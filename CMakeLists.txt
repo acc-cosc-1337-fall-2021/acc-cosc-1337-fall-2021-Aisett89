@@ -1,14 +1,15 @@
 ﻿cmake_minimum_required(VERSION 3.8)
 
 project("cosc1337")
-set (CMAKE_CXX_STANDARD 11)
+set (CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall")
 include_directories(inc)
 
-MACRO(SUBDIRLIST result curdir)
-  FILE(GLOB children RELATIVE ${curdir} ${curdir}/*)
-  SET(dirlist "")
-  FOREACH(child ${children})
+
+MACRO(SUBDIRLIST result curdir) # current directory
+  FILE(GLOB children RELATIVE ${curdir} ${curdir}/*) # Finds all of the objects inside of curdir (files or directories) => children (array of filesystem objects)
+  SET(dirlist "") # directory list that is set to open string. 
+  FOREACH(child ${children}) # 
     IF(IS_DIRECTORY ${curdir}/${child})
       LIST(APPEND dirlist ${child})
     ENDIF()

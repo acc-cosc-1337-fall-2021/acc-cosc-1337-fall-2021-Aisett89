@@ -1,8 +1,8 @@
 // MAIN
 #include "tic_tac_toe_manager.h"
 #include "tic_tac_toe.h"
-#include "tic_tac_toe3.h"
-#include "tic_tac_toe4.h"
+#include "tic_tac_toe_3.h"
+#include "tic_tac_toe_4.h"
 #include <utility>      
 #include <string>
 #include <vector>
@@ -32,10 +32,15 @@ int main()
 	int o;
 	int x;
 
-	uniq_ptr<TicTacToe>TTT; 
-	TicTacToeManager TTTM;
+	unique_ptr<TicTacToe> TTT; 
+	unique_ptr<TicTacToeManager> TTTM;
 
-    //  TicTacToe(int size) : pegs(size*size, " "){};
+// 1.   Allow users to choose between a tic tac toe 3 or 4 game.
+// Modify TicTacToe game (or whatever variable name you used), to unique_ptr to TicTacToe. (An instance of TicTacToe3 or 4 will be created in the next step)
+// Prompt the user to play TicTacToe 3 or 4 (requires conditional to create correct instance)  In the conditional structure
+// Create an instance (make_unique) of TicTacToe3 or 4 to manager.save_game
+// For TicTacToe variable, change .notation to -> operator.
+
 
 	cout<<"\nHello! Welcome to Tic-Tac-Toe!\n";
 	cout<<"\nWould you like to play a game?\n";
@@ -44,11 +49,11 @@ int main()
 	cin>>play_style;
 	if ( play_style == 3 )
 		{
-			TTT = make_unique<TicTacToe3>(); // calling games. 
+			TTT = make_unique<TicTacToe3>(); // tells porgram that TTT is now the inherited class, TTT3.  
 		}
 	else if ( play_style == 4 )
 		{
-			TTT = make_unique<TicTacToe4>(); //calling games. 
+			TTT = make_unique<TicTacToe4>(); // tells porgram that TTT is now the inherited class, TTT4.  
 		}
 	cout<<"Type 1 to play or 2 to quit: ";
 	cin>>choice;
@@ -65,7 +70,7 @@ int main()
 	// OVERLOADING //
 		while ( TTT->game_over() != true )
 		{
-			cin >> TTT; // pass game instance to be ran. 
+			cin >> *TTT; // pass game instance to be ran. 
 			cout << TTT; // output game results
 		} 
 	// END GAME FUNCTIONALITY //
@@ -97,3 +102,4 @@ int main()
 
 	return 0;
 }
+
