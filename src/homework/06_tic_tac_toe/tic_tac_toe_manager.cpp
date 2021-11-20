@@ -1,4 +1,6 @@
 #include "tic_tac_toe_manager.h"
+#include "tic_tac_toe.h"
+#include <iostream>
 #include <utility>
 #include<memory>      
 #include <string>
@@ -10,6 +12,7 @@ using std::make_pair;
 using std::pair;
 using std::endl;
 using std::unique_ptr;
+using std::make_unique;
 using std::vector;
 using std::string;
 using std::string;
@@ -18,51 +21,58 @@ using std::istream;
 using std::cout;
 using std::cin;
 
-void TicTacToeManager::save_game( unique_ptr<TicTacToe> &Tic_Tac )
-{
-    update_winner_count( Tic_Tac->get_winner() ); // Tic_Tac is ttt as variable being passed to get winner
-    games.push_back( move(Tic_Tac) ); // Taking Tic_tac game and adding it to games vector
-}       
+//cpp
 
-void TicTacToeManager::get_winner_total(int& x, int& o, int& t) // I think this is all I have to do...?
+TicTacToeManager::TicTacToeManager(Data d): data(d)
 {
-    x = x_wins;
+    games = data.get_games();
+    for (auto &game :games )
+    {
+        update_winner_count(game->get_winner());
+    }
+}
+
+void TicTacToeManager::save_game(std::unique_ptr<TicTacToe>& game)
+{
+    update_winner_count(game->get_winner());
+    games.push_back(std::move(game));
+}
+
+void TicTacToeManager::update_winner_count(std::string winner)
+{
+    if(winner == "X")
+    {
+        x_wins++;
+    }
+    else if(winner == "O")
+    {
+        o_wins++;
+    }
+    else
+    {
+        ties++;
+    }
+}
+
+void TicTacToeManager::get_winner_total(int& o, int& x, int&t)
+{
     o = o_wins;
+    x = x_wins;
     t = ties;
 }
 
-ostream& operator<<( ostream & output, const TicTacToeManager &TTTM )
+std::ostream& operator<<(std::ostream & out, const TicTacToeManager & manager)
 {
-    for ( const auto /*pointer to *game */&game : TTTM.games ) // for each game in games, do something with one game. 
-    { // passing by memory location to be able to modify values in the location? <-- saves compilation?? As about this. 
-        output << *game << endl;    // display one-by-one, each game that was played. 
-    }            // ^-- dereferencing for value (not the memory location.)
-    return output;
-}
-
-bool TicTacToeManager::testing_function(int& o_wins, int& x_wins, int& ties)
-{ // Validate that a player has won or not. 
-    int x = x_wins; // extracting data from origin point
-    int o = o_wins;
-    int t = ties;
-    bool returning_bool = false;
-    while (returning_bool != true)
+    for(auto& game: manager.games)
     {
-        if ( x > 0 || o > 0 )
-        {        
-            cout<< "Yup." << endl;
-                returning_bool = true;
-        }
-        else if ( t > 0)
-        {
-            cout << "Nah. It was a tie." << endl;
-        }
-        else
-        { 
-            cout<< "Nope." << endl;
-            return returning_bool; 
-        } 
+        out<<*game<<"\n";
     }
-    return returning_bool;
+
+    return out;
 }
 
+
+TicTacToeManager::~TicTacToeManager() 
+{
+    data.save_games(games);
+}
